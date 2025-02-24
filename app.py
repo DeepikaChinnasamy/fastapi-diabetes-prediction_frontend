@@ -3,7 +3,7 @@ import requests
 import numpy as np
 
 # FastAPI Backend URL (Replace with your deployed API URL)
-API_URL = "https://web-production-4999.up.railway.app/docs"
+API_URL = "https://web-production-4999.up.railway.app/predict"
 
 # Streamlit UI Configuration
 st.set_page_config(page_title="Diabetes Prediction", layout="centered")
@@ -28,15 +28,17 @@ with st.form("diabetes_form"):
 
 # Handle clear button
 if clear_btn:
-    st.experimental_rerun()
+    st.rerun()  # ✅ Fix: Use `st.rerun()` instead of `st.experimental_rerun()`
 
 # Handle predict button
 if submit_btn:
     try:
-        st.info("🔄 Processing... Please wait!")
+        processing_msg = st.info("🔄 Processing... Please wait!")  # Show loading message
+
         response = requests.post(API_URL, json={"feature_values": values})
         result = response.json()
-        
+
+        processing_msg.empty()
         # Display Prediction Result
         if "prediction" in result:
             st.success(f"✅ {result['prediction']}")
