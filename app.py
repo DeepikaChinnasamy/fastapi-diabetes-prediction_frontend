@@ -3,7 +3,7 @@ import requests
 import numpy as np
 
 # FastAPI Backend URL (Replace with your deployed API URL)
-API_URL = "https://your-app-name.up.railway.app/predict"
+API_URL = "https://web-production-4999.up.railway.app/docs"
 
 # Streamlit UI Configuration
 st.set_page_config(page_title="Diabetes Prediction", layout="centered")
